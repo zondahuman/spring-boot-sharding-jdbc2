@@ -100,12 +100,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.abin.lee.sharding.jdbc.entity.OrderItem" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_order_item (order_id, user_id, business_name, 
+    <!--<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >-->
+      <!--SELECT LAST_INSERT_ID()-->
+    <!--</selectKey>-->
+    insert into t_order_item (id, order_id, user_id, business_name,
       business_desc)
-    values (#{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{businessName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{businessName,jdbcType=VARCHAR},
       #{businessDesc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abin.lee.sharding.jdbc.entity.OrderItem" >
