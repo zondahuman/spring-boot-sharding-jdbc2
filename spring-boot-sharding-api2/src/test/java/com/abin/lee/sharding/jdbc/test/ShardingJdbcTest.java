@@ -59,7 +59,7 @@ public class ShardingJdbcTest {
 
     @Test
     public void testSelectByUserId() {
-        int orderCount = orderMapper.selectById(29964856509595652L);
+        int orderCount = orderMapper.selectByUserId(29965307745927172L);
         System.out.println("-----------------------------------------------------");
         System.out.println(orderCount + "--------= " + orderCount);
         System.out.println("-----------------------------------------------------");

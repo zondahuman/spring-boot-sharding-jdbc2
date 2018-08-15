@@ -223,7 +223,7 @@
     select
     count(*)
     from t_order tor inner join t_order_item toi on tor.id=toi.order_id
-    where user_id = #{userId,jdbcType=BIGINT}
+    where tor.user_id = #{userId,jdbcType=BIGINT}
   </select>
 
 

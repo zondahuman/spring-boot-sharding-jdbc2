@@ -132,7 +132,7 @@ logging:
                     springboot:
                                 dao: DEBUG
         level:
-              ROOT: DEBUG
+#              ROOT: DEBUG
               com:
                   abin:
                         lee:
