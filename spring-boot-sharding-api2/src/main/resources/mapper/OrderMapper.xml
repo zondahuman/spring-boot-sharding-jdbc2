@@ -208,4 +208,15 @@
       order_count = #{orderCount,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+  <select id="selectById" resultType="int" parameterType="java.lang.Long" >
+    select
+      count(*)
+    from t_order tor inner join t_order_item toi on tor.id=toi.order_id
+      where tor.id = #{id,jdbcType=BIGINT}
+  </select>
+
+
 </mapper>

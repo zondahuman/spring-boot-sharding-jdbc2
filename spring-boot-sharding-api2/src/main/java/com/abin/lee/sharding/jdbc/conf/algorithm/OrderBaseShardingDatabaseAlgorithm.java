@@ -20,7 +20,7 @@ public class OrderBaseShardingDatabaseAlgorithm implements ComplexKeysShardingAl
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, Collection<ShardingValue> shardingValues) {
         Collection<Long> userIdValues = getShardingValue(shardingValues, "user_id");
-        Collection<Long> idValues = getShardingValue(shardingValues, "order_id");
+        Collection<Long> idValues = getShardingValue(shardingValues, "id");
         Collection<Long> values = (userIdValues != null && userIdValues.size() > 0) ? userIdValues : idValues;
         List<String> shardingSuffix = new ArrayList<>();
         if (values != null && values.size() > 0) {

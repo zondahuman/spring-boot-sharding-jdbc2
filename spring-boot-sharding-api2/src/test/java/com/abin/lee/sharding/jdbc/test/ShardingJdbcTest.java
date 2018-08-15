@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -22,11 +23,14 @@ public class ShardingJdbcTest {
     private OrderMapper orderMapper;
     @Autowired
     private OrderItemMapper orderItemMapper;
+
+
     @Test
+//    @Transactional
     public void testCreateOrder1() {
         Order order = new Order();
-        long orderId = SnowflakeIdWorker.getId(2L);
-        long userId = SnowflakeIdWorker.getId(2L);
+        long userId = SnowflakeIdWorker.getId(4L);
+        long orderId = SnowflakeIdWorker.getId(userId);
         order.setId(orderId);
         order.setUserId(userId);
         order.setBusinessId((long) (Math.random() * 100000));
@@ -34,10 +38,10 @@ public class ShardingJdbcTest {
         order.setOrderPrice(new BigDecimal(100));
         orderMapper.insert(order);
         OrderItem orderItem = new OrderItem();
-        long itemId = SnowflakeIdWorker.getId(2L);
+        long itemId = SnowflakeIdWorker.getId(4L);
         orderItem.setId(itemId);
         orderItem.setBusinessDesc("business desc" + (long) (Math.random() * 1000));
-        orderItem.setBusinessName("味多美" + (long) (Math.random() * 1000));
+        orderItem.setBusinessName("fish-" + (long) (Math.random() * 1000));
         orderItem.setOrderId(orderId);
         orderItem.setUserId(userId);
         orderItemMapper.insert(orderItem);
@@ -46,11 +50,23 @@ public class ShardingJdbcTest {
 
     @Test
     public void test2() {
-        Order order = orderMapper.selectByPrimaryKey((long) 60771);
+        int orderCount = orderMapper.selectById(29964856509595652L);
         System.out.println("-----------------------------------------------------");
-        System.out.println(order.getId() + "--------= " + order.getUserId());
+        System.out.println(orderCount + "--------= " + orderCount);
         System.out.println("-----------------------------------------------------");
 
     }
+
+
+    @Test
+    public void testGenetorId() {
+        long sequenceMask = -1L ^ (-1L << 8L);
+        System.out.println("-----------------------------------------------------");
+        System.out.println( "-----------------------sequenceMask = " + sequenceMask);
+        System.out.println("-----------------------------------------------------");
+
+    }
+
+
 
 }

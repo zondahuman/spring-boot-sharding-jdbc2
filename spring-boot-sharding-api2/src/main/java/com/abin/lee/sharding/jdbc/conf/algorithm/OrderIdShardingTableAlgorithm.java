@@ -23,6 +23,7 @@ public class OrderIdShardingTableAlgorithm implements PreciseShardingAlgorithm<L
         long ext = shardingKey % TABLE_COUNT;
         for (String name : availableTargetNames) {
             if (name.endsWith("_" + ext)) {
+                System.out.println("---------------------------------table--------------------------- :" + name);
                 return name;
             }
         }

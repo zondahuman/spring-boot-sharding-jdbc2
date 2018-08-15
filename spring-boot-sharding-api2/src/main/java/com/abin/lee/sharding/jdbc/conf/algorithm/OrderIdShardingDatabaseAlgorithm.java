@@ -21,6 +21,7 @@ public class OrderIdShardingDatabaseAlgorithm implements PreciseShardingAlgorith
         long ext = shardingKey % DB_COUNT;
         for (String name : availableTargetNames) {
             if (name.endsWith("_" + ext)) {
+                System.out.println("---------------------------------db--------------------------- :" + name);
                 return name;
             }
         }
