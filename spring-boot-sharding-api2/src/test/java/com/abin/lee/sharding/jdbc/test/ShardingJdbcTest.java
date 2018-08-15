@@ -1,6 +1,7 @@
 package com.abin.lee.sharding.jdbc.test;
 
 import com.abin.lee.sharding.jdbc.common.generator.SnowflakeIdWorker;
+import com.abin.lee.sharding.jdbc.dao.OrderItemMapper;
 import com.abin.lee.sharding.jdbc.dao.OrderMapper;
 import com.abin.lee.sharding.jdbc.entity.Order;
 import com.abin.lee.sharding.jdbc.entity.OrderItem;
@@ -19,7 +20,8 @@ public class ShardingJdbcTest {
 
     @Autowired
     private OrderMapper orderMapper;
-
+    @Autowired
+    private OrderItemMapper orderItemMapper;
     @Test
     public void testCreateOrder1() {
         Order order = new Order();
@@ -38,7 +40,7 @@ public class ShardingJdbcTest {
         orderItem.setBusinessName("味多美" + (long) (Math.random() * 1000));
         orderItem.setOrderId(orderId);
         orderItem.setUserId(userId);
-
+        orderItemMapper.insert(orderItem);
     }
 
 

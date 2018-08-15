@@ -34,7 +34,7 @@ public class OrderBaseShardingTableAlgorithm implements ComplexKeysShardingAlgor
                 });
             }
         }
-
+        System.out.println("---------------------------------table--------------------------- :" + shardingSuffix);
         return shardingSuffix;
     }
 
