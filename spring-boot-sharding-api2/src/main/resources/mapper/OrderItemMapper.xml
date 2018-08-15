@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.abin.lee.sharding.jdbc.dao.OrderItemMapper" >
   <resultMap id="BaseResultMap" type="com.abin.lee.sharding.jdbc.entity.OrderItem" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="business_name" property="businessName" jdbcType="VARCHAR" />
     <result column="business_desc" property="businessDesc" jdbcType="VARCHAR" />
   </resultMap>
@@ -83,15 +83,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from t_order_item
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_order_item
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.abin.lee.sharding.jdbc.entity.OrderItemExample" >
     delete from t_order_item
@@ -100,16 +100,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.abin.lee.sharding.jdbc.entity.OrderItem" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_order_item (order_id, user_id, business_name, 
       business_desc)
-    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{businessName,jdbcType=VARCHAR}, 
+    values (#{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{businessName,jdbcType=VARCHAR}, 
       #{businessDesc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abin.lee.sharding.jdbc.entity.OrderItem" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_order_item
@@ -129,10 +129,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
+        #{orderId,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="businessName != null" >
         #{businessName,jdbcType=VARCHAR},
@@ -152,13 +152,13 @@
     update t_order_item
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.orderId != null" >
-        order_id = #{record.orderId,jdbcType=INTEGER},
+        order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
       <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.businessName != null" >
         business_name = #{record.businessName,jdbcType=VARCHAR},
@@ -173,9 +173,9 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update t_order_item
-    set id = #{record.id,jdbcType=INTEGER},
-      order_id = #{record.orderId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
       business_name = #{record.businessName,jdbcType=VARCHAR},
       business_desc = #{record.businessDesc,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -186,10 +186,10 @@
     update t_order_item
     <set >
       <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=INTEGER},
+        order_id = #{orderId,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="businessName != null" >
         business_name = #{businessName,jdbcType=VARCHAR},
@@ -198,14 +198,14 @@
         business_desc = #{businessDesc,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.abin.lee.sharding.jdbc.entity.OrderItem" >
     update t_order_item
-    set order_id = #{orderId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
+    set order_id = #{orderId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
       business_name = #{businessName,jdbcType=VARCHAR},
       business_desc = #{businessDesc,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

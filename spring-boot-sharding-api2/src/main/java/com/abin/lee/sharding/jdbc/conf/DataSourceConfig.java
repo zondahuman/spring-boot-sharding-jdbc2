@@ -6,9 +6,7 @@ import com.abin.lee.sharding.jdbc.conf.algorithm.OrderIdShardingDatabaseAlgorith
 import com.abin.lee.sharding.jdbc.conf.algorithm.OrderIdShardingTableAlgorithm;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.google.common.collect.Lists;
-import io.shardingjdbc.core.api.MasterSlaveDataSourceFactory;
 import io.shardingjdbc.core.api.ShardingDataSourceFactory;
-import io.shardingjdbc.core.api.algorithm.masterslave.MasterSlaveLoadBalanceAlgorithmType;
 import io.shardingjdbc.core.api.algorithm.masterslave.RoundRobinMasterSlaveLoadBalanceAlgorithm;
 import io.shardingjdbc.core.api.config.MasterSlaveRuleConfiguration;
 import io.shardingjdbc.core.api.config.ShardingRuleConfiguration;
@@ -22,10 +20,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.actuate.health.CompositeHealthIndicator;
-import org.springframework.boot.actuate.health.DataSourceHealthIndicator;
 import org.springframework.boot.actuate.health.HealthAggregator;
-import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -138,9 +133,9 @@ public class DataSourceConfig {
         shardingRuleConfig.getTableRuleConfigs().add(getOrderBaseTableRuleConfiguration());
         shardingRuleConfig.getTableRuleConfigs().add(getOrderDetailTableRuleConfiguration());
 //        // 默认不分库分表
-//        shardingRuleConfig.setDefaultDataSourceName("order1_master");
-//        shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new NoneShardingStrategyConfiguration());
-//        shardingRuleConfig.setDefaultTableShardingStrategyConfig(new NoneShardingStrategyConfiguration());
+        shardingRuleConfig.setDefaultDataSourceName("order1_master");
+        shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new NoneShardingStrategyConfiguration());
+        shardingRuleConfig.setDefaultTableShardingStrategyConfig(new NoneShardingStrategyConfiguration());
         shardingRuleConfig.setMasterSlaveRuleConfigs(getMasterSlaveRuleConfigurations());
 
         return ShardingDataSourceFactory.createDataSource(createDataSourceMap(),
@@ -148,7 +143,6 @@ public class DataSourceConfig {
 //        return ShardingDataSourceFactory.createDataSource(createDataSourceMap(),
 //                shardingRuleConfig, new ConcurrentHashMap<>(), new Properties());
     }
-
 
 
     // 订单主表
@@ -179,13 +173,13 @@ public class DataSourceConfig {
 
     List<MasterSlaveRuleConfiguration> getMasterSlaveRuleConfigurations() {
         MasterSlaveRuleConfiguration masterSlaveRuleConfig0 = new MasterSlaveRuleConfiguration();
-        masterSlaveRuleConfig0.setName("ms0_order0");
+        masterSlaveRuleConfig0.setName("order_0");
         masterSlaveRuleConfig0.setMasterDataSourceName("order0_master");
         masterSlaveRuleConfig0.setSlaveDataSourceNames(Arrays.asList("order0_slave_0", "order0_slave_1"));
         masterSlaveRuleConfig0.setLoadBalanceAlgorithmClassName(RoundRobinMasterSlaveLoadBalanceAlgorithm.class.getName());
 
         MasterSlaveRuleConfiguration masterSlaveRuleConfig1 = new MasterSlaveRuleConfiguration();
-        masterSlaveRuleConfig1.setName("ms1_order1");
+        masterSlaveRuleConfig1.setName("order_1");
         masterSlaveRuleConfig1.setMasterDataSourceName("order1_master");
         masterSlaveRuleConfig1.setSlaveDataSourceNames(Arrays.asList("order1_slave_0", "order1_slave_1"));
         masterSlaveRuleConfig1.setLoadBalanceAlgorithmClassName(RoundRobinMasterSlaveLoadBalanceAlgorithm.class.getName());
