@@ -15,9 +15,8 @@
 server:
     port: 9061
 
-logging:
-    level:
-        ROOT: DEBUG
+
+
 
 
 spring:
@@ -126,6 +125,23 @@ spring:
 
 
 
+logging:
+        org:
+            springframework: WARN
+            spring:
+                    springboot:
+                                dao: DEBUG
+        level:
+#              ROOT: DEBUG
+              com:
+                  abin:
+                        lee:
+                            sharding:
+                                      jdbc:
+                                            dao:
+                                                 DEBUG
+#                                                 OrderMapper: DEBUG
+#                                                 OrderItemMapper: DEBUG
 
 
 
@@ -134,4 +150,3 @@ spring:
 #local:
 #      dev:
 #          flag: true
-
