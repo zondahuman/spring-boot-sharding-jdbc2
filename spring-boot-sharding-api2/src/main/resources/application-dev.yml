@@ -1,0 +1,137 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: http://www.jhipster.tech/profiles/
+# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+server:
+    port: 9061
+
+logging:
+    level:
+        ROOT: DEBUG
+
+
+spring:
+    application:
+                  name: sharding-jdbc-app
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: false # we use gulp + BrowserSync for livereload
+    jackson:
+        serialization.indent_output: true
+    order0_master:
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.jdbc.Driver
+                    url: jdbc:mysql://localhost:3306/order_0?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                    username: root
+                    password:
+                    initial-size: 5
+                    min-idle: 1
+                    max-active: 5
+                    max-wait: 60000
+                    time-between-eviction-runs-millis: 60000
+                    min-evictable-idle-time-millis: 30000
+                    max-evictable-idle-time-millis: 60000
+    order0_slave_0:
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.jdbc.Driver
+                    url: jdbc:mysql://localhost:3306/order_0?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                    username: root
+                    password:
+                    initial-size: 5
+                    min-idle: 1
+                    max-active: 5
+                    max-wait: 60000
+                    time-between-eviction-runs-millis: 60000
+                    min-evictable-idle-time-millis: 30000
+                    max-evictable-idle-time-millis: 60000
+    order0_slave_1:
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.jdbc.Driver
+                    url: jdbc:mysql://localhost:3306/order_0?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                    username: root
+                    password:
+                    initial-size: 5
+                    min-idle: 1
+                    max-active: 5
+                    max-wait: 60000
+                    time-between-eviction-runs-millis: 60000
+                    min-evictable-idle-time-millis: 30000
+                    max-evictable-idle-time-millis: 60000
+
+    order1_master:
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.jdbc.Driver
+                    url: jdbc:mysql://localhost:3306/order_1?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                    username: root
+                    password:
+                    initial-size: 5
+                    min-idle: 1
+                    max-active: 5
+                    max-wait: 60000
+                    time-between-eviction-runs-millis: 60000
+                    min-evictable-idle-time-millis: 30000
+                    max-evictable-idle-time-millis: 60000
+    order1_slave_0:
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.jdbc.Driver
+                    url: jdbc:mysql://localhost:3306/order_1?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                    username: root
+                    password:
+                    initial-size: 5
+                    min-idle: 1
+                    max-active: 5
+                    max-wait: 60000
+                    time-between-eviction-runs-millis: 60000
+                    min-evictable-idle-time-millis: 30000
+                    max-evictable-idle-time-millis: 60000
+    order1_slave_1:
+                    type: com.alibaba.druid.pool.DruidDataSource
+                    driver-class-name: com.mysql.jdbc.Driver
+                    url: jdbc:mysql://localhost:3306/order_1?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                    username: root
+                    password:
+                    initial-size: 5
+                    min-idle: 1
+                    max-active: 5
+                    max-wait: 60000
+                    time-between-eviction-runs-millis: 60000
+                    min-evictable-idle-time-millis: 30000
+                    max-evictable-idle-time-millis: 60000
+    datasource:
+                type: com.alibaba.druid.pool.DruidDataSource
+                driver-class-name: com.mysql.jdbc.Driver
+                url: jdbc:mysql://localhost:3306/order_0?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+                username: root
+                password:
+                initial-size: 5
+                min-idle: 1
+                max-active: 5
+                max-wait: 60000
+                time-between-eviction-runs-millis: 60000
+                min-evictable-idle-time-millis: 30000
+                max-evictable-idle-time-millis: 60000
+
+
+
+
+
+
+
+
+#本地开发联调标识
+local:
+    dev:
+     flag: true
+
