@@ -29,7 +29,8 @@ public class ShardingJdbcTest {
 //    @Transactional
     public void testCreateOrder1() {
         Order order = new Order();
-        long userId = SnowflakeIdWorker.getId(4L);
+        long userId = 29965307745927172L;
+//        long userId = SnowflakeIdWorker.getId(4L);
         long orderId = SnowflakeIdWorker.getId(userId);
         order.setId(orderId);
         order.setUserId(userId);
@@ -49,12 +50,19 @@ public class ShardingJdbcTest {
 
 
     @Test
-    public void test2() {
+    public void testSelectById() {
         int orderCount = orderMapper.selectById(29964856509595652L);
         System.out.println("-----------------------------------------------------");
         System.out.println(orderCount + "--------= " + orderCount);
         System.out.println("-----------------------------------------------------");
+    }
 
+    @Test
+    public void testSelectByUserId() {
+        int orderCount = orderMapper.selectById(29964856509595652L);
+        System.out.println("-----------------------------------------------------");
+        System.out.println(orderCount + "--------= " + orderCount);
+        System.out.println("-----------------------------------------------------");
     }
 
 
