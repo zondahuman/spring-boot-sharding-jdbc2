@@ -50,11 +50,11 @@ public class SwaggerConfig {
                 .title("Spring Boot 测试使用 Swagger2 构建RESTful API")
                 .termsOfServiceUrl("https://github.com/zondahuman/spring-boot-sharding-jdbc2")
                 //创建人
-                .contact(new Contact("MarryFeng", "https://github.com/zondahuman", ""))
+                .contact(new Contact("abin", "https://github.com/zondahuman", ""))
                 //版本号
                 .version("1.0")
                 //描述
-                .description("API 描述")
+                .description("API DESC")
                 .build();
     }
 
