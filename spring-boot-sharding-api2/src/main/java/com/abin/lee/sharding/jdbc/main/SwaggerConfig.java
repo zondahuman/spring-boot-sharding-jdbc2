@@ -35,7 +35,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .enable(swaggerShow)
                 .apiInfo(buildApiInf())
-                .host("localhost"+localPort)
+                .host("localhost:"+localPort)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.abin.lee.sharding.jdbc.controller"))//controller路径
                 .paths(PathSelectors.any()).build();

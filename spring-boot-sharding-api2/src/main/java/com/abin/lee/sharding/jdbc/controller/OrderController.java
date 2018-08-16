@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by abin on 2018/8/16.
@@ -27,7 +24,7 @@ public class OrderController {
     @ApiImplicitParam(name = "param", value = "随机参数", paramType = "path", required = true, dataType = "Integer")
     @RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String add(Integer param) {
+    public String add(@RequestParam Integer param) {
         String localParam = env.getProperty("local.param");
         log.info("---------param= " + param + "  , localParam= " + localParam);
         return localParam;
@@ -37,7 +34,7 @@ public class OrderController {
     @ApiImplicitParam(name = "id", value = "订单号", paramType = "path", required = true, dataType = "Integer")
     @RequestMapping(value = "/find", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String find(Long id) {
+    public String find(@RequestParam Long id) {
 
         log.info("---------param= " + id);
         return id + "";
