@@ -43,8 +43,12 @@ public class OrderShardingTest {
         OrderItem orderItem = new OrderItem();
         long itemId = SnowflakeIdWorker.getId(4L);
         orderItem.setId(itemId);
-        orderItem.setBusinessDesc("business desc" + (long) (Math.random() * 1000));
-        orderItem.setBusinessName("fish-" + (long) (Math.random() * 1000));
+        String businessDesc = "business-desc695" ;
+//        String businessDesc = "business-desc" + (long) (Math.random() * 1000) ;
+        orderItem.setBusinessDesc(businessDesc);
+        String businessName = "fish-755" ;
+//        String businessName = "fish-" + (long) (Math.random() * 1000) ;
+        orderItem.setBusinessName(businessName);
         orderItem.setOrderId(orderId);
         orderItem.setUserId(userId);
         orderItemMapper.insert(orderItem);

@@ -242,6 +242,7 @@
     toi.business_desc as businessDesc
     from t_order tor inner join t_order_item toi on tor.id=toi.order_id
     where tor.user_id = #{userId,jdbcType=BIGINT}
+    group by toi.business_name
     order by toi.order_id asc
   </select>
 
