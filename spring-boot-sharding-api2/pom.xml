@@ -10,17 +10,144 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-boot-sharding-api2</artifactId>
+    <packaging>war</packaging>
+
+
+
 
 
 
     <dependencies>
+
         <dependency>
             <artifactId>spring-boot-sharding-common</artifactId>
             <groupId>com.abin.lee</groupId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>${spring.boot.version}</version>
+            <!-- 这里需要compile,如果是provided的话会一直报错-->
+            <scope>compile</scope>
+        </dependency>
+
+
+        <!-- tomcat-servlet-api -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>8.0.36</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <activatedProperties>dev</activatedProperties>
+                <swagger.scope>compile</swagger.scope>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>local</id>
+            <properties>
+                <activatedProperties>local</activatedProperties>
+                <swagger.scope>compile</swagger.scope>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>beta</id>
+            <properties>
+                <activatedProperties>beta</activatedProperties>
+                <swagger.scope>compile</swagger.scope>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+                <swagger.scope>provided</swagger.scope>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <build>
+        <finalName>sharding-jdbc-split</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+
+        </resources>
+
+        <filters>
+            <filter>src/main/resources/application-${activatedProperties}.yml</filter>
+        </filters>
+
+        <plugins>
+            <!--<plugin>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--&lt;!&ndash;<version>1.5.2.RELEASE</version>&ndash;&gt;-->
+            <!--<version>${spring.boot.version}</version>-->
+            <!--<configuration>-->
+            <!--<mainClass>com.abin.lee.nearby.api.NearbyApplication</mainClass>&lt;!&ndash;springboot启动类目录&ndash;&gt;-->
+            <!--</configuration>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--&lt;!&ndash;创建一个自动可执行的jar或war文件 &ndash;&gt;-->
+            <!--<goal>repackage</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
 
 
 </project>
