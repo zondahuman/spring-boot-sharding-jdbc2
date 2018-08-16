@@ -20,7 +20,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.actuate.health.CompositeHealthIndicator;
+import org.springframework.boot.actuate.health.DataSourceHealthIndicator;
 import org.springframework.boot.actuate.health.HealthAggregator;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -252,29 +255,29 @@ public class DataSourceConfig {
     }
 
 
-//    @Bean(name = "dbHealthIndicator")
-//    public HealthIndicator dbHealthIndicator() {
-//
-//        Map<String, DataSource> dataSourceMap = new HashMap<>(4);
-//        dataSourceMap.put("ds_0", dataSource00());
-//        dataSourceMap.put("ds_1", dataSource01());
-//        dataSourceMap.put("ds_2", dataSource02());
-//        dataSourceMap.put("ds_3", dataSource10());
-//        dataSourceMap.put("ds_4", dataSource11());
-//        dataSourceMap.put("ds_5", dataSource12());
-//        if (dataSourceMap.size() == 1) {
-//            return new DataSourceHealthIndicator(dataSourceMap.values().iterator().next());
-//        } else {
-//            CompositeHealthIndicator composite = new CompositeHealthIndicator(this.healthAggregator);
-//            Iterator var3 = dataSourceMap.entrySet().iterator();
-//
-//            while (var3.hasNext()) {
-//                Map.Entry<String, DataSource> entry = (Map.Entry) var3.next();
-//                composite.addHealthIndicator((String) entry.getKey(), new DataSourceHealthIndicator(entry.getValue()));
-//            }
-//
-//            return composite;
-//
-//        }
-//    }
+    @Bean(name = "dbHealthIndicator")
+    public HealthIndicator dbHealthIndicator() {
+
+        Map<String, DataSource> dataSourceMap = new HashMap<>(4);
+        dataSourceMap.put("order0_master", dataSource00());
+        dataSourceMap.put("order0_slave_0", dataSource01());
+        dataSourceMap.put("order0_slave_1", dataSource02());
+        dataSourceMap.put("order1_master", dataSource00());
+        dataSourceMap.put("order1_slave_0", dataSource01());
+        dataSourceMap.put("order1_slave_1", dataSource02());
+        if (dataSourceMap.size() == 1) {
+            return new DataSourceHealthIndicator(dataSourceMap.values().iterator().next());
+        } else {
+            CompositeHealthIndicator composite = new CompositeHealthIndicator(this.healthAggregator);
+            Iterator var3 = dataSourceMap.entrySet().iterator();
+
+            while (var3.hasNext()) {
+                Map.Entry<String, DataSource> entry = (Map.Entry) var3.next();
+                composite.addHealthIndicator((String) entry.getKey(), new DataSourceHealthIndicator(entry.getValue()));
+            }
+
+            return composite;
+
+        }
+    }
 }
