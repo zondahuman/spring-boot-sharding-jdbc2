@@ -17,11 +17,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * Created by abin on 2018/8/16.
  * http://localhost:9061/swagger-ui.html
- * http://localhost:9061/api-docs
+ * http://localhost:9061/v2/api-docs
  */
 @Configuration
-//@EnableWebMvc
-//@EnableSwagger2
 public class SwaggerConfig {
     @Autowired
     private Environment env;
