@@ -95,7 +95,8 @@
             <id>prod</id>
             <properties>
                 <activatedProperties>prod</activatedProperties>
-                <swagger.scope>provided</swagger.scope>
+                <swagger.scope>compile</swagger.scope>
+                <!--<swagger.scope>provided</swagger.scope>-->
             </properties>
         </profile>
     </profiles>
