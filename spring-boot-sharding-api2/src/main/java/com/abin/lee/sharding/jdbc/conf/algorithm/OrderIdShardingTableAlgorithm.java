@@ -14,7 +14,7 @@ import java.util.Collection;
  */
 public class OrderIdShardingTableAlgorithm implements PreciseShardingAlgorithm<Long> {
 
-    private static final int TABLE_COUNT = 2;
+    private static final int TABLE_COUNT = 4;
 
 
     @Override

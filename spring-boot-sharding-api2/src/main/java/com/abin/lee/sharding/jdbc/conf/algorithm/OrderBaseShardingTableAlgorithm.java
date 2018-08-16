@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class OrderBaseShardingTableAlgorithm implements ComplexKeysShardingAlgorithm {
 
-    private static final int TABLE_COUNT = 2;
+    private static final int TABLE_COUNT = 4;
 
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, Collection<ShardingValue> shardingValues) {
