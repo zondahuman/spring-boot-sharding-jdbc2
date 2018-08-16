@@ -1,4 +1,4 @@
-package com.abin.lee.sharding.jdbc.test;
+package com.abin.lee.sharding.jdbc.order.test;
 
 import com.abin.lee.sharding.jdbc.common.util.HttpClientUtil;
 import org.apache.commons.lang3.RandomStringUtils;
