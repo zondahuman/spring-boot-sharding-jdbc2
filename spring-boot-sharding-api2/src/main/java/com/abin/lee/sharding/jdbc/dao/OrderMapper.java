@@ -3,6 +3,8 @@ package com.abin.lee.sharding.jdbc.dao;
 import com.abin.lee.sharding.jdbc.entity.Order;
 import com.abin.lee.sharding.jdbc.entity.OrderExample;
 import java.util.List;
+
+import com.abin.lee.sharding.jdbc.vo.OrderItemMixedBean;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
@@ -30,6 +32,7 @@ public interface OrderMapper {
 
     int selectById(Long id);
     int selectByUserId(Long userId);
+    List<OrderItemMixedBean> selectListByUserId(Long userId);
 
 
 }
