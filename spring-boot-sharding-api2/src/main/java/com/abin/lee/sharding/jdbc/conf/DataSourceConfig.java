@@ -174,6 +174,7 @@ public class DataSourceConfig {
         return result;
     }
 
+    //主从读写分离配置
     List<MasterSlaveRuleConfiguration> getMasterSlaveRuleConfigurations() {
         MasterSlaveRuleConfiguration masterSlaveRuleConfig0 = new MasterSlaveRuleConfiguration();
         masterSlaveRuleConfig0.setName("order_0");

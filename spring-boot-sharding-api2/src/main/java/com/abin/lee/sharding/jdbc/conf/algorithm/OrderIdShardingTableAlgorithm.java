@@ -9,8 +9,7 @@ import java.util.Collection;
 /**
  * 订单分表算法
  *
- * @author syniu
- * @version OrderBaseShardingTableAlgorithm.java, 2018/5/17 17:02
+
  */
 public class OrderIdShardingTableAlgorithm implements PreciseShardingAlgorithm<Long> {
 
